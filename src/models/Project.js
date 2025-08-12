@@ -1,11 +1,11 @@
-import { UUID, DataTypes } from 'sequelize';
+import { DataTypes, UUIDV4 } from 'sequelize';
 import {sequelize} from '../database/database.js';
 import { Task } from './Task.js';
 
-export const Proyect = sequelize.define('projects', {
+export const Project = sequelize.define('projects', {
     UUID: {
         type: DataTypes.UUID,
-        defaultValue: UUID.v4,
+        defaultValue: UUIDV4,
         primaryKey: true,
     },
     name: {
@@ -19,12 +19,12 @@ export const Proyect = sequelize.define('projects', {
     }
 })
 
-Proyect.hasMany(Task, {
+Project.hasMany(Task, {
     foreignKey: 'projectUUID',
     sourceKey: 'UUID',
 })
 
-Task.belongsTo(Proyect, {
+Task.belongsTo(Project, {
     foreignKey: 'projectUUID',
     targetKey: 'UUID', 
 })
